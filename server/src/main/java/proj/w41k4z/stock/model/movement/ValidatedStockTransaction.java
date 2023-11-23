@@ -10,5 +10,5 @@ import javax.persistence.Table;
 @Table(name = "validate_stock_transaction")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "action_type")
-public abstract class ValidatedStockTransaction {
+public abstract class ValidatedStockTransaction extends StockMovement {
 }

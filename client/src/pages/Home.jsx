@@ -2,30 +2,29 @@ import React, { useEffect, useState } from 'react'
 import Axios from 'axios'
 
 const Home = () => {
+  const [stockState, setStockState] = useState([]);
   const [fromDate, setFromDate] = useState();
   const [toDate, setToDate] = useState();
   const [storePattern, setStorePattern] = useState('');
   const [articlePattern, setArticlePattern] = useState('');
   useEffect(() => {
     if (fromDate && toDate) {
-      
+      getStockState();
     }
   }, [fromDate, toDate])
 
-  const staticStockState = [
-    {
-      storeCode: "M1",
-      articleCode: "RR",
-      initialStock: 300,
-      remainingStock: 500,
-      averageUnitPrice: 2380,
-      totalPrice: 1190000
-    }
-  ]
-
   const getStockState = async () => {
-    // const 
-    // await Axios.get('http://localhost:3001/stockState', {
+    const body = {
+      date1: fromDate,
+      date2: toDate,
+      store: storePattern,
+      article: articlePattern
+    }
+    await Axios.get('http://localhost:8080/stockState', body).then((response) => {
+      setStockState(response.data)
+    }).catch((error) => {
+      alert(error)
+    })
   }
 
   return (
@@ -48,6 +47,24 @@ const Home = () => {
           } id='toDate' />
         </div>
       </div>
+      <div className='d-flex justify-content-between mb-3'>
+        <div className='d-flex align-items-center'>
+          <label htmlFor='storePattern'>Store: </label>
+          <input type='text' className='ms-2 form-control' onChange={
+            (e) => {
+              setStorePattern(e.target.value)
+            }
+          } id='storePattern' />
+        </div>
+        <div className='d-flex align-items-center'>
+          <label htmlFor='articlPattern'>Article: </label>
+          <input type='text' className='ms-2 form-control' onChange={
+            (e) => {
+              setArticlePattern(e.target.value)
+            }
+          } id='articlPattern' />
+        </div>
+      </div>
       <div className='table-responsive'>
         <table className="table table-striped">
             <thead className="px-2 table-bordered table-dark">
@@ -61,7 +78,7 @@ const Home = () => {
                 </tr>
             </thead>
           <tbody className="px-2">
-            {staticStockState.map((item, index) => {
+            {stockState.map((item, index) => {
               return (
                 <tr key={index}>
                   <td>{item.storeCode}</td>
