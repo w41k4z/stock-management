@@ -26,12 +26,7 @@ public class StockState {
     @Column(name = "remaining_stock")
     private Double remainingStock;
 
-    // Stock state only
-    @Column(name = "unit_price")
-    private Double unitPrice;
-
-    // Article stock state only
-    @Column(name = "avg_unit_price")
+    @Column(name = "average_unit_price")
     private Double averageUnitPrice;
 
     @Column(name = "total_price")
@@ -67,14 +62,6 @@ public class StockState {
 
     public void setRemainingStock(Double remainingStock) {
         this.remainingStock = remainingStock;
-    }
-
-    public Double getUnitPrice() {
-        return unitPrice;
-    }
-
-    public void setUnitPrice(Double unitPrice) {
-        this.unitPrice = unitPrice;
     }
 
     public Double getAverageUnitPrice() {
