@@ -313,7 +313,8 @@ ALTER TABLE "public".stock_movement ADD CONSTRAINT cns_stock_movement_type CHECK
 
 ALTER TABLE "public".stock_movement ADD CONSTRAINT cns_stock_movement_quantity_and_unit_price CHECK ( quantity > 0 AND unit_price > 0 );
 
-COMMENT ON TABLE "public"."method" IS 'method type : FIFO, LIFO ...';]]></string>
+COMMENT ON TABLE "public"."method" IS 'method type : FIFO, LIFO ...';
+]]></string>
 		</script>
 	</layout>
 </project>
